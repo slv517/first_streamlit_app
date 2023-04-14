@@ -55,7 +55,8 @@ streamlit.dataframe(my_data_rows)
 
 # New section to display fruityvice api response
 streamlit.header('Fruityvice Fruit Advice!')
-fruit_choice = streamlit.text_input("What fruit would you like information about?", "jackfruit")
+add_my_fruit = "jackfruit"
+fruit_choice = streamlit.text_input("What fruit would you like information about?", add_my_fruit)
 
 
 import requests
@@ -65,6 +66,8 @@ fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_c
 # take the json version of the response and normalise it
 fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 
-streamlit.text("Thanks for adding jackfruit")
+streamlit.text("Thanks for adding " + add_my_fruit)
 
+
+my_cur.execute("insert into fruit_load_list values ('from streamlit')")
 
